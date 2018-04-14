@@ -79,9 +79,20 @@ def generate_route2(chain_length=5, initial_points=40):
     return generate_chain_of_points(points, chain_length)
 
 
-def generate_arrival_departures(count):
+def generate_arrival_departures(count, ensure_in_transit=False):
     pairs = []
     current_time = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
+    if ensure_in_transit:
+        # We manually add the first point if we're ensuring in transit
+        count -= 1
+        pair = [current_time]
+        # Increment 55 minutes so we know that they departed 5 minutes ago
+        current_time += datetime.timedelta(minutes=55)
+        pair.append(current_time)
+        pairs.append(pair)
+        # Increment for next arrival
+        current_time += datetime.timedelta(minutes=random.randint(8, 25))
+
     for i in range(count):
         pair = [current_time]
         # Increment for departure
@@ -98,7 +109,10 @@ def generate_truck_schedule(truck_count=5):
     for i in range(truck_count):
         func = random.choice([generate_route1, generate_route2])
         chain = func(random.randint(3, 8), 40)
-        times = generate_arrival_departures(len(chain))
+        if i + 1 == truck_count:
+            times = generate_arrival_departures(len(chain), True)
+        else:
+            times = generate_arrival_departures(len(chain), True)
         stops = []
         for n in range(len(chain)):
             stops.append({
