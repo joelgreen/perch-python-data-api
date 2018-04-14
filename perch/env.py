@@ -11,7 +11,7 @@ class Default(object):
     aws_region = default_aws_region
 
     # Elasticsearch URL
-    elasticsearch_host_url = ""
+    elasticsearch_host_url = "search-perch-pla2or76rhkktulwix6unxknce.us-west-2.es.amazonaws.com"
 
 
 env_mapper = {
