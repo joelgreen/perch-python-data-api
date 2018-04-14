@@ -4,31 +4,6 @@ import random
 import json
 import math
 
-test_schedule = {
-    "trucks": [
-        {
-            "truck_name": "Truck 1",
-            "stops": [
-                {
-                    "lat": 31,
-                    "lon": 41,
-                    "arrival": 1,
-                    "departure": 1
-                },
-            ]
-        },
-
-    ]
-}
-
-
-def generate_fake_trucks():
-    pass
-
-
-def generate_fake_stops():
-    pass
-
 
 def generate_random_point_in_bounds(min_x, min_y, max_x, max_y):
     return [random.uniform(min_x, max_x), random.uniform(min_y, max_y)]
