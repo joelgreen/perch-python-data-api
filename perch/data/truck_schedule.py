@@ -112,7 +112,7 @@ def generate_truck_schedule(truck_count=5):
         if i + 1 == truck_count:
             times = generate_arrival_departures(len(chain), True)
         else:
-            times = generate_arrival_departures(len(chain), True)
+            times = generate_arrival_departures(len(chain), False)
         stops = []
         for n in range(len(chain)):
             stops.append({
