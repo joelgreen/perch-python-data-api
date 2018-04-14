@@ -13,7 +13,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/', methods=['GET'])
 @cross_origin(origin='*', headers=['Content-Type'])
 def test():
-    return Response('Perch API V1')
+    return Response('Perch API v1.0.0')
 
 
 @app.route('/hello', methods=['GET'])
