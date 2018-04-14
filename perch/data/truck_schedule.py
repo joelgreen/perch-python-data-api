@@ -1,6 +1,7 @@
 import datetime
 import random
 import json
+import math
 
 test_schedule = {
     "trucks": [
@@ -12,21 +13,6 @@ test_schedule = {
                     "lon": 41,
                     "arrival": 1,
                     "departure": 1
-                },
-                {
-                    "coord": [33.9885892996, -118.471458908]
-                },
-                {
-                    "coord": [33.9885892996, -118.471458908]
-                },
-                {
-                    "coord": [33.9885892996, -118.471458908]
-                },
-                {
-                    "coord": [33.9885892996, -118.471458908]
-                },
-                {
-                    "coord": [33.9885892996, -118.471458908]
                 },
             ]
         },
@@ -75,7 +61,37 @@ def geojson_for_points(points, reverse=True):
     return geo_json
 
 
+def generate_chain_of_points(points, chain_length=5):
+    start_point = random.choice(points)
+    chain = [start_point]
+    for i in range(chain_length):
+        chain.append(find_closest_point(start_point, points, chain))
+    return chain
+
+
+def find_closest_point(cur_point, all_points, excluded_points):
+    closet_point = None
+    closet_dist = 0
+    for point in all_points:
+        if any([set(p) == set(point) for p in excluded_points]):
+            continue
+        dist = euclidean_distance(cur_point, point)
+        if dist < closet_dist or closet_point is None:
+            closet_point = point
+            closet_dist = dist
+    return closet_point
+
+
+def euclidean_distance(coord_1, coord_2):
+    return math.sqrt((coord_1[0] - coord_2[0]) ** 2 + (coord_1[1] - coord_2[1]) ** 2)
+
+
+def generate_route(chain_length=5, initial_points=40):
+    points = [generate_random_point_in_bounds(min_lat, min_lon, max_lat, max_lon) for _ in range(initial_points)]
+    return generate_chain_of_points(points, chain_length)
+
+
 if __name__ == '__main__':
-    points = [generate_random_point_in_bounds(min_lat, min_lon, max_lat, max_lon) for _ in range(40)]
-    geojson = geojson_for_points(points)
+    _chain = generate_route(5, 40)
+    geojson = geojson_for_points(_chain)
     print json.dumps(geojson, indent=4)
