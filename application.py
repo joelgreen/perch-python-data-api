@@ -1,9 +1,7 @@
-import sys
-
-sys.path.insert(0, "./lib")
-
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 from flask.ext.cors import CORS, cross_origin
+
+from perch.data.truck_schedule import generate_truck_schedule
 
 app = Flask(__name__)
 application = app
@@ -18,8 +16,18 @@ def test():
 
 @app.route('/hello', methods=['GET'])
 @cross_origin(origin='*', headers=['Content-Type'])
-def test_endpoints():
+def hello_world():
     return Response('Hello world!')
+
+
+@app.route('/random_truck_schedule', methods=['GET'])
+@cross_origin(origin='*', headers=['Content-Type'])
+def random_truck_schedule():
+    trucks = generate_truck_schedule(5)
+    resp = {
+        "trucks": trucks
+    }
+    return jsonify(resp)
 
 
 if __name__ == '__main__':
