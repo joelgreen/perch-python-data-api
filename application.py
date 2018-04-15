@@ -43,7 +43,6 @@ def get_van_locations():
     return jsonify(van_locations)
 
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
             port=app.config.get("PORT", 7331),

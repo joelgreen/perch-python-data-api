@@ -255,20 +255,6 @@ van_locations = {
             "stops": [
                 {
                     "arrival": 1523752015,
-                    "departure": 1523756035,
-                    "lat": 33.900387,
-                    "lon": -118.390800
-                }
-            ],
-            "revenue": 1468,
-            "title": "Van 3284",
-            "address": "1301 Parkview Ave",
-            "remaining": "1 hour 45 minutes remaining"
-        },
-        {
-            "stops": [
-                {
-                    "arrival": 1523752015,
                     "departure": 1523756575,
                     "lat": 34.035338,
                     "lon": -118.498580
@@ -307,6 +293,20 @@ van_locations = {
             "address": "1500 W 160th St.",
             "remaining": "1 hour 5 minutes remaining"
 
+        },
+        {
+            "stops": [
+                {
+                    "arrival": 1523752015,
+                    "departure": 1523756035,
+                    "lat": 34.036434,
+                    "lon": -118.232495
+                }
+            ],
+            "revenue": 1468,
+            "title": "Van 3284",
+            "address": "652 Mateo St.",
+            "remaining": "1 hour 30 minutes remaining"
         },
         {
             "stops": [
