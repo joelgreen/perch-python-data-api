@@ -108,8 +108,8 @@ def generate_truck_schedule(truck_count=5):
     trucks = []
     for i in range(truck_count):
         func = random.choice([generate_route1, generate_route2])
-        chain = func(random.randint(3, 8), 30)
-        if i + 1 == truck_count:
+        chain = func(random.randint(3, 8), 15)
+        if i + 2 >= truck_count:
             times = generate_arrival_departures(len(chain), True)
         else:
             times = generate_arrival_departures(len(chain), False)
